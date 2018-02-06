@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\WSTC\Strings.c" />
+    <ClCompile Include="..\src\WSTC\Main.c" />
+    <ClCompile Include="..\src\WSTC\DynamicLibrary.c" />
+    <ClCompile Include="..\src\WSTC\ProcessTools.c">
+      <Filter>Process tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Process tools">
+      <UniqueIdentifier>{d981e849-9d92-47cd-9b70-058df7b26cea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\WSTC\ProcessTools.h">
+      <Filter>Process tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WSTC\Strings.h" />
+    <ClInclude Include="..\src\Defines.h" />
+    <ClInclude Include="..\src\WSTC\DynamicLibrary.h" />
+  </ItemGroup>
+</Project>

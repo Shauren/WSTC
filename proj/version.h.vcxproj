@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseZeroDebug|Win32">
+      <Configuration>ReleaseZeroDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B6640F7A-B56C-4557-9FBA-2B2CEDCBEF22}</ProjectGuid>
+    <RootNamespace>versionh</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectName)\</IntDir>
+    <ExtensionsToDeleteOnClean>*.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectName)\</IntDir>
+    <ExtensionsToDeleteOnClean>*.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\src\version.h\CreateVersion.gen">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">cd $(IntDir)
+setlocal
+for /F "Tokens=*" %%a in ('"git describe --match init --dirty=+ --abbrev=12"') do set git_hash=%%a
+for /F "Tokens=*" %%a in ('"git show -s --format=%%ci"') do set git_date=%%a
+for /F "Tokens=*" %%a in ('"git rev-parse --abbrev-ref HEAD"') do set git_branch=%%a
+SET git_hash=%git_hash:~-13%
+if %git_hash:~-1% NEQ + SET git_hash=%git_hash:~1%
+echo #define GIT_HASH "%git_hash%"&gt; sniffer_version.h
+echo #define GIT_DATE "%git_date%"&gt;&gt;sniffer_version.h
+echo #define GIT_BRANCH "%git_branch%"&gt;&gt; sniffer_version.h
+echo #define SNIFFER_VERSION_STRING GIT_HASH " " GIT_DATE " (" GIT_BRANCH " branch)"&gt;&gt; sniffer_version.h
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'">cd $(IntDir)
+setlocal
+for /F "Tokens=*" %%a in ('"git describe --match init --dirty=+ --abbrev=12"') do set git_hash=%%a
+for /F "Tokens=*" %%a in ('"git show -s --format=%%ci"') do set git_date=%%a
+for /F "Tokens=*" %%a in ('"git rev-parse --abbrev-ref HEAD"') do set git_branch=%%a
+SET git_hash=%git_hash:~-13%
+if %git_hash:~-1% NEQ + SET git_hash=%git_hash:~1%
+echo #define GIT_HASH "%git_hash%"&gt; sniffer_version.h
+echo #define GIT_DATE "%git_date%"&gt;&gt;sniffer_version.h
+echo #define GIT_BRANCH "%git_branch%"&gt;&gt; sniffer_version.h
+echo #define SNIFFER_VERSION_STRING GIT_HASH " " GIT_DATE " (" GIT_BRANCH " branch)"&gt;&gt; sniffer_version.h
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'">VersionGenerator.log;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VersionGenerator.log;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating sniffer version strings</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'">Generating sniffer version strings</Message>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="version.h\sniffer_version.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

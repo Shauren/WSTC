@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\Shared\Output.c" />
+    <ClCompile Include="..\src\Shared\Replacement.c" />
+    <ClCompile Include="..\src\Shared\RemoteModule.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Shared\Output.h" />
+    <ClInclude Include="..\src\Shared\Replacement.h" />
+    <ClInclude Include="..\src\Shared\RemoteModule.h" />
+  </ItemGroup>
+</Project>
