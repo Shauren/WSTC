@@ -162,13 +162,6 @@
       <GenerateMapFile>false</GenerateMapFile>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
-    <PreBuildEvent>
-      <Command>setlocal
-cd ..\src\CodeBreaker
-copy /b Rebuilder.cl+,, &gt;nul
-endlocal
-</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -218,13 +211,6 @@ endlocal
       <MapFileName>$(OutDir)\$(TargetName).map</MapFileName>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
-    <PreBuildEvent>
-      <Command>setlocal
-cd ..\src\CodeBreaker
-copy /b Rebuilder.cl+,, &gt;nul
-endlocal
-</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|Win32'">
     <ClCompile>
@@ -288,17 +274,6 @@ endlocal
       <MapFileName>$(OutDir)\$(TargetName).map</MapFileName>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>setlocal
-cd ..\src\CodeBreaker
-copy /b Rebuilder.cl+,, &gt;nul
-endlocal
-</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseZeroDebug|x64'">
     <ClCompile>
@@ -362,17 +337,6 @@ endlocal
       <MapFileName>$(OutDir)\$(TargetName).map</MapFileName>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>setlocal
-cd ..\src\CodeBreaker
-copy /b Rebuilder.cl+,, &gt;nul
-endlocal
-</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
