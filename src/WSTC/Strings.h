@@ -41,6 +41,8 @@
 
 #define MAX_STRINGS                         12
 
+#define MAX_ENCODED_STRING_LEN 40
+
 #ifdef __cplusplus
 extern "C" {
 #endif
